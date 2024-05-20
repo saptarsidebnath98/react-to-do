@@ -1,5 +1,81 @@
-html, body {
+*{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+html, body, .child-div, .eachItem, .todo-btn, .addItems, .showItems{
     display: flex;
+}
+html, body {
     justify-content: center;
     align-items: flex-start;
+}
+.child-div{
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+
+}
+.child-div figcaption{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.addItems .form-control{
+    border: 2px solid black;
+    border-radius: 10px 0px 0px 10px;
+    padding: 10px;
+    overflow-wrap: normal;
+}
+.addItems{
+    border-radius: 10px;
+}
+.addItems i{
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
+}
+.addItems .form-control{
+    flex: 1;
+    user-select: none;
+}
+.add-btn:active{
+    background-color: green;
+    user-select: none;
+}
+.showItems{
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+
+    width: 90%;
+}
+.eachItem{
+    align-items: center;
+    font-size: 0.8rem;
+
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    height: 20%;
+}
+.eachItem h3{
+    flex: 1;
+    margin: 0px;
+}
+.todo-btn{
+    gap: 10px;
+}
+.todo-btn i{
+    cursor: pointer;
+}
+.addItems, .eachItem, .chk-btn{
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+.chk-btn{
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    width: 50%;
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
 }
