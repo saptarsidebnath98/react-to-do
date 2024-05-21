@@ -1,9 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.css"
+
+//get locat storage data
+const getLocalData = () => {
+  const lists = localStorage.getItem("mytodolist");
+
+  if (lists){
+    return JSON.parse(lists);
+  }else{
+    return [];
+  }
+};
 
 const ToDo = () => {
   const [inputData, setInputData ]= useState("");
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(getLocalData());
+  const [isEditItem, setIsEditItem] = useState("");
+
   //add the items
   const addItem = () => {
     if(!inputData){
@@ -17,8 +30,15 @@ const ToDo = () => {
       setInputData("");
     };
   };
-  //how to delete item section
 
+  //edit item
+  const editItem = (index) => {
+    const item_todo_edited = items.find((curElem) => {
+      return curElem.id === index;
+    })
+    setIsEditItem(index);
+  }
+  //how to delete item section
   const deleteItem = (index) => {
     const updatedItems = items.filter((curElem) => {
       return curElem.id !== index;
@@ -29,7 +49,13 @@ const ToDo = () => {
   //remove all
   const removeAll = () => {
     setItems([]);
-  }
+  };
+
+  //adding localStorage  
+  useEffect(()=> {
+    localStorage.setItem("mytodolist", JSON.stringify(items));
+  },[items]);
+
   return (
     <>
       <div className="main-div">
@@ -50,8 +76,8 @@ const ToDo = () => {
                   <div className="eachItem" key={curElem.id}>
                     <h3>{curElem.name}</h3>
                     <div className="todo-btn">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <i class="fa-solid fa-trash-can" onClick={()=> deleteItem(curElem.id)}></i>
+                    <i className="fa-solid fa-pen-to-square" onClick={()=> editItem(curElem.id)}></i>
+                    <i className="fa-solid fa-trash-can" onClick={()=> deleteItem(curElem.id)}></i>
                     </div>
 
                   </div>
